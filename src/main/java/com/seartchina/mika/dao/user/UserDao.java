@@ -34,6 +34,6 @@ public interface UserDao {
 	public void addFriend(@Param("userId")Integer userId, @Param("friendId")Integer friendId);
 	
 	@Update("update user_relationship set status = #{status} where user_id = #{userId} and friend_user_ud = #{friendId}")
-    public void updateFriendStatus(@Param("userId")Integer userId, @Param("friendId")Integer friendId, @Param("status")Integer status);
+	public void updateFriendStatus(@Param("userId")Integer userId, @Param("friendId")Integer friendId, @Param("status")Integer status);
 	
 }
