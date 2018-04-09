@@ -14,7 +14,7 @@
     http://www.springframework.org/schema/cache  
     http://www.springframework.org/schema/cache/spring-cache.xsd">
 
-	<context:component-scan base-package="com.seartchina.mika" />
+	<context:component-scan base-package="com.seartchina.mika.dao" />
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -30,13 +30,12 @@
 	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name=" dataSource" ref="dataSource" />
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com/seartchina/mika/dao" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+		<property name="basePackage" value="com.seartchina.mika.dao" />
 	</bean>
 
 
@@ -45,6 +44,6 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-
 	<tx:annotation-driven transaction-manager="txManager" />
+	
 </beans>  

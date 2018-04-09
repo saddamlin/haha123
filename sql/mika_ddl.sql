@@ -1,123 +1,121 @@
-###### Users ######
--- USER_INFO
-CREATE TABLE USER_INFO
+
+-- user
+create table user_info
 (
-USER_ID integer primary key,
-USER_AVATAR blob,
-USER_SIGNATURE text,
-CREATED_DATE timestamp,
-LAST_MODIFIED_DATE timestamp
+  user_id int not null auto_increment,
+  open_id varchar(100) not null,
+  user_name varchar(100) not null,
+  gender char(2) not null default 'u' ,
+  description varchar(1024),
+  phone varchar(20),
+  date_of_birth date,
+  avantar blob,
+  created_date datetime not null default now(),
+  last_update_date datetime not null default now(),
+  primary key (user_id, open_id)
 );
 
--- USER FRIENDS
-CREATE TABLE USER_FRIENDS
+create table user_relationship
 (
-USER_ID integer primary key,
-FRIEND_USER_ID integer primary key,
-CREATED_DATE timestamp,
-LAST_MODIFIED_DATE timestamp
+  user_id int not null,
+  friend_user_id int not null,
+  rel_status tinyint not null,
+  created_date datetime not null default now(),
+  last_update_date datetime not null default now()
 );
 
-##### Backpack #####
-
-CREATE TABLE USER_ELEMENT_BACKPACK
+create table user_session
 (
-ELEMENT_ID integer primary key,
-USER_ID integer primary key,
-ELEMENT_TYPE int4,
-ELEMENT_STATUS int4,
-CREATED_DATE timestamp,
-LAST_MODIFIED_DATE timestamp
+  session_id int not null auto_increment,
+  user_id int not null,
+  start_time datetime,
+  end_time datetime,
+  latitude int,
+  longtitude int,
+  accuracy int,
+  created_date datetime not null default now(),
+  last_update_date datetime not null default now(),
+  primary key (session_id)
 );
 
-CREATE TABLE MINE_ELEMENT_DETAILS
+create table user_element
 (
-ELEMENT_ID integer primary key,
-MINT_TYPE int4,
-CREATED_DATE timestamp,
-LAST_MODIFIED_DATE timestamp
+  user_id int not null,
+  element_id int not null,
+  quantity int not null,
+  created_date datetime not null default now(),
+  last_update_date datetime not null default now(),
+  primary key (user_id, element_id)
 );
 
-CREATE TABLE USER_SEED_BACKPACK
+create table user_notification
 (
-SEED_ID integer primary key,
-USER_ID integer primary key,
-SEED_TYPE int4,
-CREATED_DATE timestamp,
-LAST_MODIFIED_DATE timestamp
+  notification_id int not null,
+  user_id int not null,
+  notification_type tinyint not null,
+  message varchar(1024),
+  created_date datetime not null default now(),
+  last_update_date datetime not null default now(),
+  primary key (notification_id)
 );
 
-CREATE TABLE USER_FRUIT_BACKPACK
+-- flower 
+create table flower_info
 (
-FRUIT_ID integer primary key,
-USER_ID integer primary key,
-FRUIT_STATUS int4,
-FRUIT_TYPE int4,
-CREATED_DATE timestamp,
-LAST_MODIFIED_DATE timestamp
+  flower_id int not null auto_increment,
+  user_id int not null,
+  flower_status tinyint not null,
+  flower_level int not null,
+  flower_exp int not null,
+  created_date datetime not null default now(),
+  last_update_date datetime not null default now()
+  primary key (flower_id)
 );
 
-
-###### Plant ######
-
-CREATE TABLE PLANT_INFO
+create table flower_element
 (
-PLANT_ID integer primary key,
-SEED_ID integer,
-USER_ID integer,
-PLANT_TYPE int4,
-PLANT_STATUS int4,
-CREATED_DATE timestamp,
-LAST_MODIFIED_DATE timestamp
+  flower_id int not null,
+  element_id int not null,
+  quantity int not null,
+  created_date datetime not null default now(),
+  last_update_date datetime not null default now(),
+  primary key (flower_id, element_id)
 );
 
-CREATE TABLE PLANT_ELEMENT
+create table flower_gift
 (
-PLANT_ID integer primary key,
-ELEMENT_ID integer primary key,
-QUANTITY integer,
-TRANSFORMED_DATE timestamp,
-CREATED_DATE timestamp,
-LAST_MODIFIED_DATE timestamp
+  gift_id int not null,
+  flower_id int not null,
+  user_id int not null,
+  gift_type tinyint not null,
+  gift_details varchar(1024),
+  gift_status tinyint not null,
+  created_date datetime not null default now(),
+  last_update_date datetime not null default now(),
+  primary key (gift_id)
 );
 
-CREATE TABLE PLANT_FRUIT
+-- quest
+create table quest_info
 (
-PLANT_ID integer primary key,
-FRUIT_ID integer primary key,
-QUANTITY integer,
-FRUTION_DATE timestamp,
-CREATED_DATE timestamp,
-LAST_MODIFIED_DATE timestamp 
+  quest_id int not null auto_increment,
+  quest_type tinyint not null,
+  quest_status tinyint not null,
+  created_date datetime not null default now(),
+  last_update_date datetime not null default now(),
+  primary key (quest_id)
 );
 
-CREATE TABLE FRUIT_ELEMENTW
+create table quest_user_map
 (
-FRUIT_ID integer primary key,
-ELEMENT_ID integer primary key,
-CREATED_DATE timestamp,
-LAST_MODIFIED_DATE timestamp 
-);
-
-CREATE TABLE GENE_ELEMENT_DETAILS
-(
-ELEMENT_ID integer primary key,
-GENE_TYPE int4,
-CREATED_DATE timestamp,
-LAST_MODIFIED_DATE timestamp 
-);
-
--- QUEST_INFO
-CREATE TABLE QUEST_INFO
-(
-QUEST_ID integer primary key,
-USER_ID integer,
-FRUIT_ID integer,
-START_DATE timestamp,
-END_DATE timestamp,
-IS_SUCCESS boolean,
-GENE_ELEMENT_ID integer,
-CREATED_DATE timestamp,
-LAST_MODIFIED_DATE timestamp
+  quest_id int not null,
+  user_id int not null,
+  user_type tinyint not null,
+  user_status tinyint not null,
+  element_id int,
+  quantity int,
+  created_date datetime not null default now(),
+  last_update_date datetime not null default now(),
+  primary key (quest_id, user_id)
 );
 
