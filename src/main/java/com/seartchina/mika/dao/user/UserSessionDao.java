@@ -18,7 +18,7 @@ public interface UserSessionDao {
 	
 	@Select("select * from user_session where user_id=#{userId} and end_time is null order by session_id desc")
 	@Results({
-		@Result(id=true, property="", column="session_id"),
+		@Result(id=true, property="sessionId", column="session_id"),
 		@Result(property="userId", column="user_id"),
 		@Result(property="startTime", column="start_time"),
 		@Result(property="endTime", column="end_time"),
