@@ -1,6 +1,7 @@
 package com.seartchina.mika.dao.user;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -28,6 +29,7 @@ public interface UserDao {
 
 	@Insert("insert into user_info (user_id, open_id, user_name, gender, description, phone, date_of_birth, avantar)"
 			+ "values (#{userId}, #{openId}, #{userName}, #{gender}, #{description}, #{phone}, #{dateOfBirth}, #{avantar})")
+	@Options(useGeneratedKeys=true, keyProperty="userId")
 	public void insertUser(User user);
 	
 	@Insert("insert into user_relationship (user_id, friend_id, rel_status) values (#{userId}, #{friendId}, 0}) ")

@@ -23,6 +23,7 @@ public class UserDaoTest {
 		user.setUserName("test_user");
 		user.setGender("u");
 		userDao.insertUser(user);
+		System.out.println(user.getUserId());
 		User user2 = userDao.getUser(1);
 		System.out.println(user2.getUserId());
 		System.out.println(user2.getUserName());
