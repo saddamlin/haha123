@@ -1,6 +1,7 @@
 package com.seartchina.mika.dao.quest.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Quest {
 	
@@ -9,6 +10,7 @@ public class Quest {
 	private Integer questStatus;
 	private Date createdDate;
 	private Date lastUpdateDate;
+	private List<QuestUserMap> questUserMaps;
 	public Integer getQuestId() {
 		return questId;
 	}
@@ -38,6 +40,12 @@ public class Quest {
 	}
 	public void setLastUpdateDate(Date lastUpdateDate) {
 		this.lastUpdateDate = lastUpdateDate;
+	}
+	public List<QuestUserMap> getQuestUserMaps() {
+		return questUserMaps;
+	}
+	public void setQuestUserMaps(List<QuestUserMap> questUserMaps) {
+		this.questUserMaps = questUserMaps;
 	}
 
 }

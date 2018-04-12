@@ -20,7 +20,7 @@ public interface UserElementDao {
 		@Result(property="createdDate",column="created_date"),
 		@Result(property="lastUpdateDate",column="last_update_date")
 	})
-	public List<UserElement> queryUserElements(Integer userId);
+	public List<UserElement> selectUserElementsByUserId(Integer userId);
 	
 	@Insert("insert into user_element(user_id,element_id,quantity) values (#{userId},#{elementId),#{quantity}")
 	public void insertUserElement(UserElement userElement);

@@ -25,6 +25,6 @@ public interface UserNotificationDao {
 		@Result(property="createdDate",column="created_date"),
 		@Result(property="lastUpdateDate",column="last_update_date")
 	})
-	public List<Notification> getNotications(Integer userId);
+	public List<Notification> selectNoticationsByUserId(Integer userId);
 
 }

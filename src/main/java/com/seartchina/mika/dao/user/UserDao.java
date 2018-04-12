@@ -25,7 +25,7 @@ public interface UserDao {
 			@Result(property="createdDate", column="created_date"),
 			@Result(property="lastUpdateDate", column="last_update_date")
 	})
-	public User getUser(Integer id);
+	public User selectUser(Integer id);
 
 	@Insert("insert into user_info (user_id, open_id, user_name, gender, description, phone, date_of_birth, avantar)"
 			+ "values (#{userId}, #{openId}, #{userName}, #{gender}, #{description}, #{phone}, #{dateOfBirth}, #{avantar})")
@@ -33,7 +33,7 @@ public interface UserDao {
 	public void insertUser(User user);
 	
 	@Insert("insert into user_relationship (user_id, friend_id, rel_status) values (#{userId}, #{friendId}, 0}) ")
-	public void addFriend(@Param("userId")Integer userId, @Param("friendId")Integer friendId);
+	public void insertFriend(@Param("userId")Integer userId, @Param("friendId")Integer friendId);
 	
 	@Update("update user_relationship set status = #{status} where user_id = #{userId} and friend_user_ud = #{friendId}")
 	public void updateFriendStatus(@Param("userId")Integer userId, @Param("friendId")Integer friendId, @Param("status")Integer status);
