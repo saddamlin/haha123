@@ -1,9 +1,12 @@
 package com.seartchina.mika.dao.quest;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.seartchina.mika.dao.quest.pojo.Quest;
 
@@ -21,5 +24,11 @@ public interface QuestDao {
 	})
 	public Quest selectQuestById(Integer questId);
 	
+	@Insert("insert into quest_info(quest_id,quest_type,quest_status) values(#{questId},#{questType},#{questStatus})")
+	@Options(useGeneratedKeys=true, keyProperty="questId")
+	public void insertQuest(Quest quest);
+	
+	@Update("update quest_info set quest_status=#{questStatus} where quest_id=#{questId}")
+	public void updateQuest(Quest quest);
 	
 }
