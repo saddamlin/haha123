@@ -23,7 +23,7 @@ public interface QuestUserMapDao {
 		@Result(property="createdDate",column="created_date"),
 		@Result(property="lastUpdateDate",column="last_update_date")
 	})
-	public List<QuestUserMap> selectQuestUserMapsByQuestId(Long questId);
+	public List<QuestUserMap> selectQuestUserMapsByQuestId(Integer questId);
 	
 	@Insert("insert into quest_user_map(quest_id,user_id,user_type,user_status,element_id,quantity)"
 			+ "values (#{questId},#{userId},#{userType},#{userStatus},#{elementId},#{quantity})")

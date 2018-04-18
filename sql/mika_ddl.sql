@@ -9,7 +9,7 @@ create table user_info
   description varchar(1024),
   phone varchar(20),
   date_of_birth date,
-  avantar blob,
+  avatar_url String,
   created_date datetime not null default now(),
   last_update_date datetime not null default now(),
   primary key (user_id, open_id)

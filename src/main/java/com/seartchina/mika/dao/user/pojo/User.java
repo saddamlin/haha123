@@ -11,7 +11,7 @@ public class User {
 	private String description;
 	private String phone;
 	private Date dateOfBirth;
-	private byte[] avantar;
+	private String avatarUrl;
 	private Date createdDate;
 	private Date lastUpdateDate;
 	public Integer getUserId() {
@@ -56,12 +56,6 @@ public class User {
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-	public byte[] getAvantar() {
-		return avantar;
-	}
-	public void setAvantar(byte[] avantar) {
-		this.avantar = avantar;
-	}
 	public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -73,6 +67,12 @@ public class User {
 	}
 	public void setLastUpdateDate(Date lastUpdateDate) {
 		this.lastUpdateDate = lastUpdateDate;
+	}
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
 	}
 	
 	
