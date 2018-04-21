@@ -27,15 +27,6 @@ import com.seartchina.mika.service.util.NotificationUtils;
 public class QuestService {
 	
 	@Autowired
-	private UserDao userDao;
-	
-	@Autowired
-	private UserSessionDao userSessionDao;
-	
-	@Autowired
-	private UserNotificationDao userNotificationDao;
-	
-	@Autowired
 	private QuestDao questDao;
 	
 	@Autowired
@@ -62,13 +53,8 @@ public class QuestService {
 			userMap.setUserType(QuestUserType.PARTICIPANT);
 			userMap.setUsetStatus(QuestUserStatus.INIT);
 			questUserMapDao.insertQuestUserMap(userMap);
-			
-			UserNotification userNotification = new UserNotification();
 			String message = notificationUtils.questInitParticipant(friendId);
-			userNotification.setMessage(message);
-			userNotification.setUserId(friendId);
-			userNotification.setNotificationType(QuestNotification.QUEST_SUCCESS);
-			userNotificationDao.addNotification(userNotification);
+			notificationUtils.sendNotification(friendId, message, QuestNotification.QUEST_INIT_PARTICIPANT);
 		}
 		
 		QuestUserMap ownerMap = new QuestUserMap();
@@ -76,13 +62,8 @@ public class QuestService {
 		ownerMap.setUserType(QuestUserType.OWNER);
 		ownerMap.setUsetStatus(QuestUserStatus.ACCEPTED);
 		questUserMapDao.insertQuestUserMap(ownerMap);
-		
-		UserNotification userNotification = new UserNotification();
-		String message = notificationUtils.questInitParticipant(userId);
-		userNotification.setMessage(message);
-		userNotification.setUserId(userId);
-		userNotification.setNotificationType(QuestNotification.QUEST_SUCCESS);
-		userNotificationDao.addNotification(userNotification);
+		String message = notificationUtils.questInitOwner(userId);
+		notificationUtils.sendNotification(userId, message, QuestNotification.QUEST_INIT_OWNER);
 	}
 	
 	public void acceptQuest(Integer userId, Integer questId) {
@@ -109,19 +90,9 @@ public class QuestService {
 			questDao.updateQuest(quest);
 			
 			for(QuestUserMap userMap:questUserMaps) {
-				// generate reward
 				ElementReward reward = elementManager.genElementReward();
-				
-				// update notification info
-				UserNotification userNotification = new UserNotification();
-				String message = notificationUtils.questSuccess(userId, reward.elementId, reward.quantity);
-				userNotification.setMessage(message);
-				userNotification.setUserId(userMap.getUserId());
-				userNotification.setNotificationType(QuestNotification.QUEST_SUCCESS);
-				userNotificationDao.addNotification(userNotification);
-				
-				// update user element info
-				
+				String message = notificationUtils.questSuccess(userMap.getUserId(), reward.elementId, reward.quantity);
+				notificationUtils.sendNotification(userMap.getUserId(), message, QuestNotification.QUEST_SUCCESS);
 				elementManager.addElement(userMap.getUserId(), reward.elementId, reward.quantity);
 			}
 		}
@@ -142,12 +113,9 @@ public class QuestService {
 		List<QuestUserMap> questUserMaps = quest.getQuestUserMaps();
 		
 		for(QuestUserMap userMap:questUserMaps) {
-			UserNotification userNotification = new UserNotification();
+
 			String message = notificationUtils.questFailure(userId);
-			userNotification.setMessage(message);
-			userNotification.setUserId(userMap.getUserId());
-			userNotification.setNotificationType(QuestNotification.QUEST_FAILURE);
-			userNotificationDao.addNotification(userNotification);
+			notificationUtils.sendNotification(userMap.getUserId(), message, QuestNotification.QUEST_FAILURE);
 		}
 		
 	}
