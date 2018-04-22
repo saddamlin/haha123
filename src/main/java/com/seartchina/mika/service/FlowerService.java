@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.seartchina.mika.dao.flower.FlowerDao;
 import com.seartchina.mika.dao.flower.FlowerGiftDao;
+import com.seartchina.mika.dao.flower.pojo.Flower;
+import com.seartchina.mika.service.constants.FlowerStatus;
 import com.seartchina.mika.service.exception.ElementException;
 import com.seartchina.mika.service.util.ElementManager;
 
@@ -22,10 +24,15 @@ public class FlowerService {
 	
 	
 	public void initFlower(Integer userId) {
-		
+		Flower flower = new Flower();
+		flower.setUserId(userId);
+		flower.setFlowerExp(0);
+		flower.setFlowerLevel(0);
+		flower.setFlowerStatus(FlowerStatus.SEED_UNPLANDED);
+		flowerDao.insertFlower(flower);
 	}
 	
-	public void plantFlower(Integer flowerId) {
+	public void plantFlower(Integer flowerId, Integer userId) {
 		
 	}
 	
@@ -33,7 +40,11 @@ public class FlowerService {
 		
 	}
 	
-	public void genGift(Integer flowerId) {
+	public void removeFlower(Integer flowerId, Integer userId) {
+		
+	}
+	
+	public void genGift(Integer flowerId, Integer userId) {
 		
 	}
 
