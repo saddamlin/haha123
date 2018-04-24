@@ -8,6 +8,7 @@ import com.seartchina.mika.dao.flower.FlowerGiftDao;
 import com.seartchina.mika.dao.flower.pojo.Flower;
 import com.seartchina.mika.service.constants.FlowerStatus;
 import com.seartchina.mika.service.exception.ElementException;
+import com.seartchina.mika.service.exception.UnauthorizedException;
 import com.seartchina.mika.service.util.ElementManager;
 
 @Service
@@ -32,8 +33,13 @@ public class FlowerService {
 		flowerDao.insertFlower(flower);
 	}
 	
-	public void plantFlower(Integer flowerId, Integer userId) {
+	public void plantFlower(Integer flowerId, Integer userId) throws UnauthorizedException{
+		Flower flower = flowerDao.selectFlowerById(flowerId);
+		if(!flower.getUserId().equals(userId)) {
+			throw new UnauthorizedException();
+		}
 		
+		flower.setFlowerStatus(FlowerStatus.SEED_PLANTED);
 	}
 	
 	public void feedFlower(Integer userId, Integer flowerId, Integer elementId, Integer quantity) throws ElementException{
