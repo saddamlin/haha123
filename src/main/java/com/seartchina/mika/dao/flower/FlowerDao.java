@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.seartchina.mika.dao.flower.pojo.Flower;
 
@@ -39,5 +40,8 @@ public interface FlowerDao {
 	@Insert("insert into flower_info(user_id,flower_status,flower_level,flower_exp) values(#{userId},#{flowerStatus},#{flowerLevel},#{flowerExp})")
 	@Options(useGeneratedKeys=true, keyProperty="flowerId")
 	public void insertFlower(Flower flower);
+	
+	@Update("update flower_info set flower_status=#{flowerStatus}, flower_level=#{flowerLevel}, flower_exp=#{flowerExp}")
+	public void updateFlower(Flower flower);
 
 }

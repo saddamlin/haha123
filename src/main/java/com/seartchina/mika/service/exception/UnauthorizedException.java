@@ -1,6 +1,6 @@
 package com.seartchina.mika.service.exception;
 
-public class UnauthorizedException extends Exception {
+public class UnauthorizedException extends RuntimeException {
 
 	public UnauthorizedException() {
 		super();

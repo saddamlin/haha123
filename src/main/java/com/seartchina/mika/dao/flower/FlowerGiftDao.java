@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -44,6 +45,10 @@ public interface FlowerGiftDao {
 	public void insertFlowerGift(FlowerGift flowerGift);
 	
 	@Update("update flower_gift set gift_status=#{giftStatus} where gift_id=#{giftId}")
-	public void updateFlowerGiftStatus(Integer giftId);
+	public void updateFlowerGiftStatus(@Param("giftId")Integer giftId, @Param("giftStatus")Integer giftStatus);
+	
+	@Update("update flower_gift set user_id=#{userId} where gift_id=#{giftId}")
+	public void updateFlowerGiftOwner(@Param("giftId")Integer giftId, @Param("userId")Integer userId);
+
 
 }

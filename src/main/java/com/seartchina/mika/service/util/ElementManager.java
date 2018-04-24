@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.seartchina.mika.dao.flower.FlowerElementDao;
+import com.seartchina.mika.dao.flower.pojo.FlowerElement;
 import com.seartchina.mika.dao.user.UserElementDao;
 import com.seartchina.mika.dao.user.pojo.UserElement;
 import com.seartchina.mika.service.exception.ElementException;
@@ -52,6 +53,22 @@ public class ElementManager {
 			}
 		}
 	}
+	
+	public void addFlowerElement(Integer flowerId, Integer elementId, Integer quantity) {
+		FlowerElement flowerElement = flowerElementDao.selectFlowerElementsByFlowerIdAndElementId(flowerId, elementId);
+		if(flowerElement == null) {
+			flowerElement = new FlowerElement();
+			flowerElement.setFlowerId(flowerId);
+			flowerElement.setElementId(elementId);
+			flowerElement.setQuantity(quantity);
+			flowerElementDao.insertFlowerElement(flowerElement);
+		}else {
+			Integer newQuantity = flowerElement.getQuantity() + quantity;
+			flowerElement.setQuantity(newQuantity);
+			flowerElementDao.updateFlowerElement(flowerElement);
+		}
+	}
+	
 	
 	
 	public class ElementReward{
