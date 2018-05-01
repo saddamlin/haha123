@@ -13,6 +13,7 @@
 
 	<mvc:interceptors>
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+		<bean class="com.seartchina.controller.LoginInterceptor" />
 	</mvc:interceptors>
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />

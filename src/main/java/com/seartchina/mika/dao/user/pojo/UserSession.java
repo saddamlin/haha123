@@ -6,6 +6,7 @@ public class UserSession {
 	
 	private Integer sessionId;
 	private Integer userId;
+	private String sessionKey;
 	private Date startTime;
 	private Date endTime;
 	private Integer latitude;
@@ -66,6 +67,12 @@ public class UserSession {
 	}
 	public void setLastUpdateDate(Date lastUpdateDate) {
 		this.lastUpdateDate = lastUpdateDate;
+	}
+	public String getSessionKey() {
+		return sessionKey;
+	}
+	public void setSessionKey(String sessionKey) {
+		this.sessionKey = sessionKey;
 	}
 	
 }

@@ -4,7 +4,7 @@ create table user_info
 (
   user_id int not null auto_increment,
   open_id varchar(100) not null,
-  user_name varchar(100) not null,
+  user_name varchar(100),
   gender char(2) not null default 'u' ,
   description varchar(1024),
   phone varchar(20),
@@ -28,6 +28,7 @@ create table user_session
 (
   session_id int not null auto_increment,
   user_id int not null,
+  session_key varchar(100),
   start_time datetime,
   end_time datetime,
   latitude int,
